@@ -14,11 +14,17 @@ class PagesController extends Controller
     public function product()
     {
         $product= array(
-            'name' => 'Book name: Introduction to Laravel',
-            'author' => 'Author name: Mr. X',
-            'price' => 'price: 100Tk '
+            "Name: Introduction to Laravel,
+            Author': Mr. X,
+            Price': '100Tk ",
+            "Name: Advanced Laravel,
+            Author': Mr. Y,
+            Price': '200Tk ",
+            "Name: Laravel From Scratch,
+            Author': Mr. Z,
+            Price': '300Tk ",
         );
-        return view('pages.product')->with('data',$product);
+        return view('pages.product')->with('product',$product);
     }
     
     public function ourTeams()
