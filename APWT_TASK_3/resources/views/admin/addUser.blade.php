@@ -4,7 +4,7 @@
     </head>
     <body>
         <div class="container" style="width:500px;">  
-        <h2>Registration</h2> 
+        <h2>Add User</h2> 
             <form action="{{ route('addUser') }}" method="POST">  
                 {{csrf_field()}}
                 <div class="form-group">

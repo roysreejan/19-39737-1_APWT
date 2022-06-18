@@ -89,6 +89,19 @@ class AdminController extends Controller
     public function admindash(){
         return view('admin.admindash');
     }
+    public function profileAdminSubmit(Request $request){
+        $user = Users::where('name', $request->name)->where('role', 'admin')->first();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = md5($request->password);
+        $user->dob = $request->dob;
+        $user->role = 'admin';
+        $user->save();
+        return redirect()->route('homeAdmin');
+    }
+
     public function profileEdit(Request $request){
         $user = Users::where('name', $request->name)->first();
 

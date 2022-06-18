@@ -24,6 +24,7 @@ Route::get('/user/homeAdmin', [AdminController::class, 'homeAdmin'])->name('home
 Route::get('/admindash', [AdminController::class, 'admindash'])->name('admindash')->middleware('ValidAdmin');
 Route::get('/profileAdmin', [pagesController::class, 'profileAdmin'])->name('profileAdmin')->middleware('ValidAdmin');
 Route::post('/profileAdmin', [AdminController::class, 'profileEdit'])->name('profileAdminEdit');
+Route::post('/profileAdmin', [pagesController::class, 'profileAdminSubmit'])->name('profileAdmin');
 Route::get('/list', [pagesController::class, 'list'])->name('listAdmin')->middleware('ValidAdmin');
 Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 

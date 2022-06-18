@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Cookie;
 
 class pagesController extends Controller
 {
@@ -25,7 +26,7 @@ class pagesController extends Controller
         $password = $request->input('password');
 
         $user = Users::where('email', $request->email)
-            ->where('password', $request->password)
+            ->where('password', md5($request->password))
             ->first();
 
         if($user && $user->role == "admin"){
@@ -64,7 +65,7 @@ class pagesController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->password = $request->password;
+        $user->password = md5($request->password);
         $user->dob = $request->dob;
         $user->gender = $request->gender;
         $user->role = "user";
@@ -83,7 +84,7 @@ class pagesController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->password = $request->password;
+        $user->password = md5($request->password);
         $user->dob = $request->dob;
         $user->gender = $request->gender;
         $user->role = "user";
@@ -96,6 +97,18 @@ class pagesController extends Controller
         $user_name = session()->get('user');
         $user = Users::where('name', $user_name)->first();
         return view('admin.profileAdmin')->with('user', $user);
+    }
+    public function profileAdminSubmit(Request $request){
+        $user = Users::where('name', $request->name)->where('role', 'admin')->first();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = md5($request->password);
+        $user->dob = $request->dob;
+        $user->role = 'admin';
+        $user->save();
+        return redirect()->route('homeAdmin');
     }
     public function list(){
         $users = Users::where('role', 'user')->get();
@@ -111,7 +124,7 @@ class pagesController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->password = $request->password;
+        $user->password = md5($request->password);
         $user->dob = $request->dob;
         //$user->gender = $request->gender;
         $user->save();
@@ -135,7 +148,7 @@ class pagesController extends Controller
             'name' => 'required| min:3',
             'email' => 'required',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'password' => 'required|min:6|confirmed',
+            'password' =>'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6|same:password',
             'dob' => 'required',
             'gender' => 'required'
@@ -147,7 +160,7 @@ class pagesController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->password = $request->password;
+        $user->password = md5($request->password);
         $user->dob = $request->dob;
         $user->gender = $request->gender;
         $user->role = "user";

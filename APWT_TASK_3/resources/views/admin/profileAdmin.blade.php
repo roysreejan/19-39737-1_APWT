@@ -3,7 +3,7 @@
     <div class = "container">
     <br><br>
      <h1>Profile</h1>
-     <form action= "{{route('profileAdminEdit')}}" class "form-group" method = "post">
+     <form action= "{{route('profileAdmin')}}" class "form-group" method = "post">
         {{csrf_field()}}
         <div class="form-group">
             <label for="name">Name</label>
@@ -48,13 +48,9 @@
             @enderror
         </div>
         <div class="form-group p-1">
-            <label for="gender">Gender</label>
-            <input type="radio" name="gender" value="female">Male
-            <input type="radio" name="gender" value="male">Female
-            <input type="radio" name="gender" value="other">Other
-            @error('gender')
-                <span class="text-danger">{{$message}}</span>
-            @enderror
+            <span>
+                <input type="submit" name="update" value="Update" class="btn btn-info">
+            </span>
         </div>
     </form>
     </div>
