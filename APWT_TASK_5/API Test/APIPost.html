@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post</title>
+</head>
+<body onload="load()">
+    <div class="createPart">
+        <h2>Api Post</h2>
+          <div >
+            <form method="POST" action="http://127.0.0.1:8000/api/Users/list">  
+            <span>Name</span>
+            <input type="text" name="name"  class = "form-control"><br><br>
+            <span>Email</span>
+            <input type="text" name="email" class = "form-control"><br><br>
+            <span>Phone Number</span>
+            <input type="text" name="phoneNumber" class = "form-control"><br><br>
+            <span>Password</span>
+            <input type="text" name="password" class = "form-control"><br><br>
+            <span>Date of Birth</span>
+            <input type="date" name="dob" class = "form-control"><br><br>
+            <label for="gender">Gender</label>
+                    <input type="radio" name="gender" value="male">Male
+                    <input type="radio" name="gender" value="female">Female
+                    <input type="radio" name="gender" value="other">Other
+                    <br>
+                    <br>
+                    <label for="role">Role</label>
+                    <select name="role" id="role">
+                        <option value="">Select Role</option>
+                      
+                        <option value="doctor">Doctor</option>
+                        <option value="patient">Patient</option>
+                        <option value="pharmacist">Pharmacist</option>
+                    </select><br><br>
+            <input type = "submit" class="btn btn-primary" value = "Add User">
+  </form>
+      <script> 
+        function load(){
+            const xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange=function(){
+                if (this.readyState == 4 && this.status ==200 ){
+                    var obj_arr=JSON.parse(this.responseText);
+                }
+            };
+            xhttp.open("POST","http://127.0.0.1:8000/api/Users/list");
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
